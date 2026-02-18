@@ -11,8 +11,7 @@ function AdminPage({
   allowAdmin: boolean;
   toggleAllow: () => void;
 }) {
-  const { user, setUser } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen flex flex-col">
