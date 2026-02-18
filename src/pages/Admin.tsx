@@ -25,7 +25,7 @@ function AdminPage({
           to="/dashboard"
           className="text-zinc-500 hover:text-white font-bold text-sm"
         >
-         Dashboard
+          Dashboard
         </Link>
       </nav>
 

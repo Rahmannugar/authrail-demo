@@ -12,8 +12,8 @@ export default function Home() {
             AuthRail
           </h1>
           <p className="text-zinc-500 text-lg">
-            A simple demonstration of AuthRail's authentication and authorization
-            logic.
+            A simple demonstration of AuthRail's authentication and
+            authorization logic.
           </p>
         </header>
 

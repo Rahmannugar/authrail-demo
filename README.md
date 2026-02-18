@@ -1,161 +1,98 @@
-AuthRail Demo
+# AuthRail Demo
 
-A fully functional demo application showcasing AuthRail in a real routing environment.
+A premium, fully interactive demonstration of **AuthRail**—the declarative policy engine for React applications. This demo showcases how to enforce authentication, role-based access control (RBAC), and custom business logic with a clean, deterministic API.
 
-This project demonstrates:
+[![npm version](https://img.shields.io/npm/v/authrail.svg?style=flat-square)](https://www.npmjs.com/package/authrail)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Rahmannugar/auth-rail.svg?style=social)](https://github.com/Rahmannugar/auth-rail)
 
-Authentication enforcement
+---
 
-Role-based authorization
+## Quick Links
 
-Context-driven policy rules
+- **NPM Package:** [authrail](https://www.npmjs.com/package/authrail)
+- **Source Code:** [Rahmannugar/auth-rail](https://github.com/Rahmannugar/auth-rail)
+- **Bug Reports:** [GitHub Issues](https://github.com/Rahmannugar/auth-rail/issues)
 
-Redirect handling
+---
 
-Component-level protection
+## Features Demonstrated
 
-Deterministic middleware execution
+- **Authentication Enforcement:** Deterministic redirection for unauthenticated users.
+- **Role-Based Authorization:** Granular access control based on user roles (Admin vs. User).
+- **Context-Driven Policies:** Real-time evaluation of business rules using `blockIf` and `allowIf`.
+- **Deterministic Middleware:** Predictable execution order with early-exit logic.
+- **Component Protection:** Non-intrusive protection using `RailBoundary` and `protect()` helpers.
+- **Debug Logging:** Built-in transparency for policy decisions.
 
-What This Demo Shows
+---
 
-This application includes:
+## Getting Started
 
-Login as user or admin
+### 1. Clone & Install
 
-Protected dashboard route
-
-Protected admin route
-
-Toggleable policy rules using blockIf and allowIf
-
-Redirect behavior
-
-Deny rendering
-
-Debug logging
-
-It tests both:
-
-RailBoundary
-
-protect() helper
-
-Tech Stack
-
-React 19
-
-React Router
-
-AuthRail
-
-TypeScript
-
-Vite
-
-Getting Started
-git clone https://github.com/your-username/authrail-demo
-cd authrail-demo
+```bash
+git clone https://github.com/Rahmannugar/auth-rail.git
+cd auth-rail
 npm install
+```
+
+### 2. Launch
+
+```bash
 npm run dev
+```
 
+Open [http://localhost:5173](http://localhost:5173) to view the demo.
 
-Open:
+---
 
-http://localhost:5173
+## Testing Scenarios
 
-Demo Structure
-src/
-  lib/
-    auth/
-      authStore.tsx
-    rails/
-      authRail.ts
-      adminRail.ts
-      types.ts
-    mock/
-      db.ts
-  pages/
-    Home.tsx
-    Login.tsx
-    Dashboard.tsx
-    Admin.tsx
+### 1. Unauthenticated Access
 
-Policies Implemented
-authRail
-requireAuth("/login")
-blockIf(ctx => ctx.blockDashboard === true)
+- **Action:** Try to visit `/dashboard` or `/admin` directly.
+- **Expected:** Immediate redirect to `/login`.
+- **Logic:** Handled by `requireAuth("/login")` in both rails.
 
+### 2. User vs. Admin Access
 
-Tests:
+- **Action:** Login as a **User** (`user@demo.com`) and try to visit the **Admin Portal**.
+- **Expected:** Access denied.
+- **Logic:** `adminRail` requires `role: "admin"`.
 
-Redirect when unauthenticated
+### 3. Dynamic Policy Toggling
 
-Conditional deny based on context flag
+- **Dashboard Blocking:** While logged in, toggle **"Block Dashboard"**. The UI will reactively switch to the denied state.
+- **Admin Clearance:** Login as **Admin** and toggle **"Grant Admin Clearance"**. This demonstrates how `allowIf` can dynamically override or supplement access.
 
-adminRail
-requireAuth("/login")
-requireRole("admin")
-allowIf(ctx => ctx.allowAdmin === true)
+### 4. Deterministic Debugging
 
+Open the browser console to see the "Rail" execution flow:
 
-Tests:
-
-Authentication enforcement
-
-Role enforcement
-
-Conditional access rule
-
-What to Test
-1. Unauthenticated Access
-
-Visit /dashboard
-
-Visit /admin
-
-Confirm redirect to /login
-
-2. User Access
-
-Login as regular user
-
-Visit /dashboard → allowed
-
-Visit /admin → denied
-
-3. Admin Access
-
-Login as admin
-
-Visit /admin
-
-Toggle allowAdmin
-
-Confirm deny/allow behavior
-
-4. Dashboard Blocking
-
-Login as user
-
-Toggle blockDashboard
-
-Confirm dashboard deny behavior
-
-5. Logout From Protected Route
-
-Logout while on /dashboard
-
-Confirm redirect occurs immediately
-
-6. Debug Logging
-
-Both rails have debug: true enabled.
-
-Observe deterministic middleware execution in console:
-
+```text
 [AuthRail:admin] → requireAuthMiddleware
 [AuthRail:admin] → requireRoleMiddleware
 [AuthRail:admin] decision → allow
+```
 
+---
 
-Execution stops at first decision.
+## Structure
+
+```text
+src/
+├── lib/
+│   ├── auth/         # Auth context & state management
+│   ├── rails/        # AuthRail definitions (authRail, adminRail)
+│   └── mock/         # Mock database & user data
+└── pages/            # View components protected by RailBoundary
+```
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+Developed with by [Rahman Nugar](https://github.com/Rahmannugar).
