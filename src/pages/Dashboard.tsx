@@ -20,7 +20,7 @@ export default function Dashboard() {
       }
       denied={
         <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center space-y-6">
-          <h1 className="text-white text-4xl font-bold italic">
+          <h1 className="text-white text-4xl font-bold">
             Access Denied.
           </h1>
           <p className="text-zinc-500 max-w-sm">
@@ -40,21 +40,49 @@ export default function Dashboard() {
       <div className="min-h-screen flex flex-col">
         <nav className="nav-bar">
           <div className="flex items-center gap-4">
-            <img src="/authrail.png" alt="Logo" className="h-8 w-auto" />
+            <Link
+              to="/"
+              className="flex items-center gap-4 hover:opacity-80 transition-opacity"
+            >
+              <img src="/authrail.png" alt="Logo" className="h-8 w-auto" />
+            </Link>
             <div className="h-4 w-px bg-zinc-800" />
-            <span className="text-white font-bold uppercase tracking-widest text-sm">
-              Dashboard
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-white font-bold uppercase tracking-widest text-[11px]">
+                Dashboard
+              </span>
+              <span className="bg-zinc-800 text-zinc-400 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tight border border-zinc-700/50">
+                {user?.role}
+              </span>
+            </div>
           </div>
-          <button
-            onClick={() => {
-              setUser(null);
-              navigate("/");
-            }}
-            className="text-zinc-500 hover:text-white font-bold text-sm"
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => {
+                setUser(null);
+                navigate("/");
+              }}
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-orange/20 text-brand-orange hover:text-white hover:bg-brand-orange hover:border-brand-orange transition-all duration-200 group"
+            >
+              <span className="text-sm font-medium">Logout</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="group-hover:translate-x-0.5 transition-transform"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" x2="9" y1="12" y2="12" />
+              </svg>
+            </button>
+          </div>
         </nav>
 
         <main className="max-w-4xl mx-auto w-full p-8 py-16 space-y-12 flex-1">

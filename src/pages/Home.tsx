@@ -8,7 +8,7 @@ export default function Home() {
           <div className="flex justify-center">
             <img src="/authrail.png" alt="AuthRail" className="h-16 w-auto" />
           </div>
-          <h1 className="text-white text-5xl font-extrabold tracking-tight">
+          <h1 className="text-white text-4xl font-extrabold tracking-tight">
             AuthRail
           </h1>
           <p className="text-zinc-500 text-lg">
